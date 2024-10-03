@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 var cors = require("cors");
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/user");
+const productRoute = require("./routes/product");
 
 dotenv.config(); //env fileból toltes
 
@@ -21,6 +23,8 @@ mongoose
   app.use(express.json());
 
   app.use("/api/auth", authRoute);
+  app.use("/api/users", userRoute);
+  app.use("/api/products", productRoute);
 
   app.listen(process.env.PORT || 5000, () => {
     console.log("Backend szerver fut!");
