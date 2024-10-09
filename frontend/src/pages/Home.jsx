@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Slider from "../components/Slider";
 import Contact from "../components/Contact";
+import Products from "../components/Products";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Announcement />
       <Navbar />
       <Slider/>
+      <Products/>
       <Contact/>
       <Footer/>
 

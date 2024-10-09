@@ -21,3 +21,38 @@ export const sliderItems = [
       bg: "fbf0f4",
     },
   ];
+
+  export const popularProducts = [
+    {
+      id:1,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+    {
+      id:2,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+    {
+      id:3,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+    {
+      id:4,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+    {
+      id:5,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+    {
+      id:6,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+    {
+      id:7,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+    {
+      id:8,
+      img:"https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg",
+    },
+  ]
