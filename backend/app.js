@@ -9,6 +9,7 @@ const userRoute = require("./routes/user");
 const cartRoute = require("./routes/cart");
 const productRoute = require("./routes/product");
 const orderRoute = require("./routes/order");
+const stripeRoute = require("./routes/stripe");
 
 dotenv.config(); //env fileból toltes
 
@@ -29,6 +30,7 @@ mongoose
   app.use("/api/products", productRoute);
   app.use("/api/carts", cartRoute);
   app.use("/api/orders", orderRoute);
+  app.use("/api/checkout", stripeRoute);
 
   app.listen(process.env.PORT || 5000, () => {
     console.log("Backend szerver fut!");
