@@ -1,4 +1,6 @@
 import Home from "./pages/Home";
+import Product from "./pages/Product";
+import ProductList from "./pages/ProductList";
 
 import {
   BrowserRouter as Router,
@@ -12,6 +14,12 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/products/:category">
+          <ProductList />
+        </Route>
+        <Route path="/product/:id">
+          <Product />
         </Route>    
       </Switch>
     </Router>
