@@ -5,6 +5,8 @@ import Products from "../components/Products";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router";
+import { useState } from "react";
 
 const Container = styled.div``;
 
@@ -37,6 +39,32 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+    if (value === "Márka" || value === "Fehérje tipusa") {
+      // Reset the filters when the default option is selected
+      const newFilters = { ...filters };
+      if (e.target.name === "brand") {
+        delete newFilters.brand; // Remove the 'brand' filter to show all products
+      }
+      if (e.target.name === "type") {
+        delete newFilters.type; // Remove the 'type' filter to show all products
+      }
+      setFilters(newFilters);
+    } else {
+      setFilters({
+        ...filters,
+        [e.target.name]: value,
+      });
+    }
+  };
+
+
   return (
     <Container>
     <Announcement />
@@ -44,37 +72,35 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Termék szűrése:</FilterText>
-          <Select>
-            <Option disabled selected>
-              Íz
+          <Select name="brand" onChange={handleFilters}>
+            <Option  selected>
+              Márka
             </Option>
-            <Option>Csokis</Option>
-            <Option>Vaniliás</Option>
-            <Option>Epres</Option>
-            <Option>Áfonyás</Option>
-            <Option>Narancsos</Option>
+            <Option>Biotech</Option>
+            <Option>Scitec</Option>
+            <Option>MyProtein</Option>
+            <Option>GymBeam</Option>
+            <Option>GoFit</Option>
           </Select>
-          <Select>
-            <Option disabled selected>
-              Méret
+          <Select name="type" onChange={handleFilters}>
+            <Option selected>
+              Fehérje tipusa
             </Option>
-            <Option>250g</Option>
-            <Option>500g</Option>
-            <Option>1000g</Option>
-            <Option>2000g</Option>
-            <Option>5000g</Option>
+            <Option>Állati eredetü</Option>
+            <Option>tejsavó alapú</Option>
+            <Option>Vegán</Option>
           </Select>
         </Filter>
         <Filter>
           <FilterText>Rendezés:</FilterText>
-          <Select>
+          <Select onChange={(e) => setSort(e.target.value)}>
             <Option selected>Legújabb</Option>
-            <Option>Legdrágább elöl</Option>
-            <Option>Legolcsóbb elöl</Option>
+            <Option value="asc">Legdrágább elöl</Option>
+            <Option value="desc">Legolcsóbb elöl</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <Contact />
       <Footer />
     </Container>

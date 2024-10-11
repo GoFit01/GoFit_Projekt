@@ -10,6 +10,7 @@ const ProductSchema = new mongoose.Schema(
     taste: { type: Array },
     price: { type: Number, required: true },
     inStock: { type: Boolean, default: true },
+    type: { type: String, required:true },
     brand: { type: String, required:true },
 
     
