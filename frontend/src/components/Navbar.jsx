@@ -191,7 +191,7 @@ const Navbar = () => {
             <DropdownMenu>
               <Link to="/edzestervek">EDZÉSTERVEK</Link>
               <Link to="/taplalkozas">TÁPLÁLKOZÁS</Link>
-              <Link to="/products">WEBSHOP</Link>
+              <Link to="/webshop">WEBSHOP</Link>
             </DropdownMenu>
           </MenuItem>
           <MenuItem>
@@ -216,7 +216,7 @@ const Navbar = () => {
         <Link to="/taplalkozas" onClick={handleMenuClick}>
           TÁPLÁLKOZÁS
         </Link>
-        <Link to="/products" onClick={handleMenuClick}>
+        <Link to="/webshop" onClick={handleMenuClick}>
           WEBSHOP
         </Link>
         <Link to="/login" onClick={handleMenuClick}>

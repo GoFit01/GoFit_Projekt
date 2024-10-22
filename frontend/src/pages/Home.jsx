@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Slider from "../components/Slider";
 import Contact from "../components/Contact";
 import Products from "../components/Products";
-import Categories from "../components/Categories";
+import Motivation from "../components/Motivation";
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
       <Announcement />
       <Navbar />
       <Slider/>
-      <Categories />
+      <Motivation/>
       <Products/>
       <Contact/>
       <Footer/>

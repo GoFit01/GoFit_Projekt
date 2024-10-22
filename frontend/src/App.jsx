@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
+import WebShop from "./pages/Webshop";
 
 import {
   BrowserRouter as Router,
@@ -36,7 +37,10 @@ const App = () => {
         </Route>
         <Route path="/profile">
         <Profile/>
-        </Route>    
+        </Route>
+        <Route path="/webshop">
+        <WebShop/>
+        </Route>      
       </Switch>
     </Router>
 );

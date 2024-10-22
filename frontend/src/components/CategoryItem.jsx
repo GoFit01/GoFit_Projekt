@@ -29,12 +29,14 @@ const Info = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);  
 `;
 
 const Title = styled.h1`
-  color: white;
+  color: white;  
   margin-bottom: 20px;
-
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  
+  
   ${mobile({ fontSize: "24px" })} 
 `;
 
@@ -45,6 +47,13 @@ const Button = styled.button`
   color: gray;
   cursor: pointer;
   font-weight: 600;
+  opacity: 0.9;  
+  
+  &:hover {
+    opacity: 1;  
+    background-color: darkgray;
+    color: white;
+  }
 
   ${mobile({ padding: "8px", fontSize: "14px" })} 
 `;
