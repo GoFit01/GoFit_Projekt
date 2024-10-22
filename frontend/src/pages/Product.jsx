@@ -3,8 +3,12 @@ import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Contact from "../components/Contact";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
+
+
 
 const Container = styled.div``;
 
@@ -44,6 +48,41 @@ const Price = styled.span`
   font-size: 40px;
 `;
 
+const FilterContainer = styled.div`
+  width: 50%;
+  margin: 30px 0px;
+  display: flex;
+  justify-content: space-between;
+  ${mobile({ width: "100%" })}
+`;
+
+const Filter = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const FilterTitle = styled.span`
+  font-size: 20px;
+  font-weight: 200;
+`;
+
+const FilterColor = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: ${(props) => props.color};
+  margin: 0px 5px;
+  cursor: pointer;
+  border: 1px solid black;
+`;
+
+const FilterSize = styled.select`
+  margin-left: 10px;
+  padding: 5px;
+`;
+
+const FilterSizeOption = styled.option``;
+
 const AddContainer = styled.div`
   width: 50%;
   display: flex;
@@ -82,35 +121,91 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [quantitygram, setQuantitygram] = useState("");
+
+
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [id]);
+
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+
+
   return (
     <Container>
-    <Announcement />
-      <Navbar /> 
+      <Announcement />
+      <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg" />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>PÖRGETŐ</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-            iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-            tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
-          </Desc>
-          <Price>$ 20</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>$ {product.price}</Price>
+          <FilterContainer>
+            <Filter>
+              <FilterTitle
+                style={product.quantitygram == 0 ? { display: "none" } : {}}
+              >
+                Mennyiség:{" "}
+              </FilterTitle>
+              <FilterSize
+                style={product.quantitygram == 0 ? { display: "none" } : {}}
+                onChange={(e) => setQuantitygram(e.target.value)}
+              >
+                {product.quantitygram?.map((s) => (
+                  <FilterSizeOption key={s}>{s} g</FilterSizeOption>
+                ))}
+                <FilterSizeOption
+                  defaultChecked
+                 
+                >
+                  Kérem válasszon!
+                </FilterSizeOption>
+              </FilterSize>
+            </Filter>
+          </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove
+                style={{ cursor: "pointer" }}
+                onClick={() => handleQuantity("dec")}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                style={{ cursor: "pointer" }}
+                
+              />
             </AmountContainer>
-            <Button>KOSÁRBA!</Button>
+            <Button
+           
+
+            >
+              HOZZÁADÁS A KOSÁRHOZ
+            </Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Contact />
+
       <Footer />
     </Container>
   );

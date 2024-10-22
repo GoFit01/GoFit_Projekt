@@ -36,20 +36,20 @@ const Option = styled.option``;
 
 const ProductList = () => {
   const location = useLocation();
-  const cat = location.pathname.split("/")[2];
+  const cat = location.pathname.split("/")[2]; 
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
 
   const handleFilters = (e) => {
     const value = e.target.value;
-    if (value === "Márka" || value === "Fehérje tipusa") {
-      // Reset the filters when the default option is selected
+    if (value === "Márka" || value === "Fehérje tipusa" || value === "Kreatin tipusa" || value === "Vitamin tipusa") {
+   
       const newFilters = { ...filters };
       if (e.target.name === "brand") {
-        delete newFilters.brand; // Remove the 'brand' filter to show all products
+        delete newFilters.brand;
       }
       if (e.target.name === "type") {
-        delete newFilters.type; // Remove the 'type' filter to show all products
+        delete newFilters.type;
       }
       setFilters(newFilters);
     } else {
@@ -60,42 +60,74 @@ const ProductList = () => {
     }
   };
 
-
   return (
     <Container>
-    <Announcement />
+      <Announcement />
       <Navbar />
       <FilterContainer>
         <Filter>
           <FilterText>Termék szűrése:</FilterText>
+
+         
           <Select name="brand" onChange={handleFilters}>
-            <Option  selected>
+            <Option value="Márka" selected>
               Márka
             </Option>
-            <Option>Biotech</Option>
-            <Option>Scitec</Option>
-            <Option>MyProtein</Option>
-            <Option>GymBeam</Option>
-            <Option>GoFit</Option>
+            <Option value="Biotech">Biotech</Option>
+            <Option value="Scitec">Scitec</Option>
+            <Option value="MyProtein">MyProtein</Option>
+            <Option value="GymBeam">GymBeam</Option>
+            <Option value="GoFit">GoFit</Option>
           </Select>
-          <Select name="type" onChange={handleFilters}>
-            <Option selected>
-              Fehérje tipusa
-            </Option>
-            <Option>Állati eredetü</Option>
-            <Option>tejsavó alapú</Option>
-            <Option>Vegán</Option>
-          </Select>
+
+          
+          {cat === "feherje" && (
+            <Select name="type" onChange={handleFilters}>
+              <Option value="Fehérje tipusa" selected>
+                Fehérje tipusa
+              </Option>
+              <Option value="Állati eredetü">Állati eredetü</Option>
+              <Option value="tejsavó alapú">Tejsavó alapú</Option>
+              <Option value="Vegán">Vegán</Option>
+            </Select>
+          )}
+
+          {cat === "kreatin" && (
+            <Select name="type" onChange={handleFilters}>
+              <Option value="Kreatin tipusa" selected>
+                Kreatin tipusa
+              </Option>
+              <Option value="Monohidrát">Monohidrát</Option>
+              <Option value="Kapszula">Kapszula</Option>
+            </Select>
+          )}
+
+          {cat === "vitamin" && (
+            <Select name="type" onChange={handleFilters}>
+              <Option value="Vitamin tipusa" selected>
+                Vitamin tipusa
+              </Option>
+              <Option value="D3">D3</Option>
+              <Option value="Multivitamin">Multivitamin</Option>
+              <Option value="Kollagen">Kollagén</Option>
+            </Select>
+          )}
         </Filter>
+
+       
         <Filter>
           <FilterText>Rendezés:</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
-            <Option selected>Legújabb</Option>
+            <Option value="newest" selected>
+              Legújabb
+            </Option>
             <Option value="asc">Legdrágább elöl</Option>
             <Option value="desc">Legolcsóbb elöl</Option>
           </Select>
         </Filter>
       </FilterContainer>
+
+   
       <Products cat={cat} filters={filters} sort={sort} />
       <Contact />
       <Footer />
