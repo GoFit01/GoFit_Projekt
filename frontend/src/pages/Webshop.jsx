@@ -6,6 +6,7 @@ import Products from "../components/Products";
 import Categories from "../components/Categories";
 import Footer from "../components/Footer";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div``;
 
@@ -138,7 +139,9 @@ const Slider = () => {
             <InfoContainer>
               <Title>Featured Product 1</Title>
               <Desc>Best product in the market</Desc>
+              <Link to="feherjek">
               <Button>Shop Now</Button>
+              </Link>
             </InfoContainer>
           </Slide>
           <Slide bg="#f0f0f0">
@@ -148,7 +151,9 @@ const Slider = () => {
             <InfoContainer>
               <Title>Featured Product 2</Title>
               <Desc>Don't miss this offer</Desc>
+              <Link to="webshop">
               <Button>Shop Now</Button>
+              </Link>
             </InfoContainer>
           </Slide>
           <Slide bg="#e0e0e0">
@@ -158,7 +163,9 @@ const Slider = () => {
             <InfoContainer>
               <Title>Featured Product 3</Title>
               <Desc>Quality at its best</Desc>
+              <Link to="webshop">
               <Button>Shop Now</Button>
+              </Link>
             </InfoContainer>
           </Slide>
         </Wrapper>
