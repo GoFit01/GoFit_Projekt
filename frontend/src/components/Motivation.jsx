@@ -13,6 +13,8 @@ const Container = styled.div`
   position: relative;
   color: white;
   text-align: center;
+  margin: 0px;
+  padding: 0px;
 
   @media (max-width: 1024px) {
     height: 80vh;  
@@ -95,7 +97,7 @@ const Motivation = () => {
       <Content>
         <Title>Lépj a következő szintre!</Title>
         <Subtitle>Személyre szabott edzéstervek és táplálkozási tanácsadás</Subtitle>
-        <CTAButton>Kezd hozzá azonnal!</CTAButton>
+        <CTAButton>KEZDJ HOZZÁ AZONNAL!</CTAButton>
       </Content>
     </Container>
   );

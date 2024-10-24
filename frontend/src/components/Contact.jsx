@@ -44,9 +44,13 @@ const Button = styled.button`
   border: none;
   background-color: teal;
   color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: darkcyan;
+  }
 `;
 
-const Newsletter = () => {
+const Contact = () => {
   return (
     <Container>
       <Title>Kapcsolat</Title>
@@ -61,4 +65,4 @@ const Newsletter = () => {
   );
 };
 
-export default Newsletter;
+export default Contact;

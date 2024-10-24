@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
-  height: 75vh; 
+  height: 65vh; 
   display: flex;
   position: relative;
   overflow: hidden;
@@ -54,17 +54,20 @@ const Slide = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  height: 100%;
   flex: 1;
   display: flex;
   justify-content: center; 
   align-items: center;
+  width: 100%;
+  max-width: 700px; 
+  height: 100%;
+  max-height: 500px; 
 `;
 
 const Image = styled.img`
-  height: auto; 
-  max-width: 100%; 
-  max-height: 80%; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
 `;
 
 const InfoContainer = styled.div`
@@ -97,6 +100,7 @@ const Button = styled.button`
   padding: 10px;
   font-size: 1rem; 
   background-color: transparent;
+  cursor: pointer;
 `;
 
 const Slider = () => {
@@ -124,9 +128,9 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Link to="products/termekek">
+              <Link to="edzestrevek">
                 <Button>
-                  UGORJUNK AZ EDZÉSEKHEZ
+                  UGRÁS AZ EDZÉSSEKHEZ
                 </Button>
               </Link>       
             </InfoContainer>

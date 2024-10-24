@@ -30,6 +30,7 @@ import {
   
   const Desc = styled.p`
     margin: 20px 0px;
+    text-align: justify
   `;
   
   const SocialContainer = styled.div`
@@ -97,9 +98,10 @@ import {
         <Left>
           <Logo>GOFIT</Logo>
           <Desc>
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration in some form, by injected
-            humour, or randomised words which don’t look even slightly believable.
+          Válogass magas minőségű étrend-kiegészítők közül, nézd meg személyre 
+          szabott edzésterveinket, és kérj szakértői táplálkozási tanácsokat, 
+          hogy elérd a kitűzött céljaidat. Legyen szó akár teljesítményfokozásról, egészségmegőrzésről. 
+          Kezdd el még ma az életmódváltást!
           </Desc>
           <SocialContainer>
             <SocialIcon color="3B5999">
