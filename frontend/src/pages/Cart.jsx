@@ -4,6 +4,9 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { clearCart } from "../redux/cartRedux";
 
 const Container = styled.div``;
 
@@ -73,7 +76,7 @@ const Details = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 const ProductName = styled.span``;
@@ -121,6 +124,12 @@ const Hr = styled.hr`
   height: 1px;
 `;
 
+const Empty = styled.h1`
+  font-weight: 600;
+  text-align: center;
+  font-size: 45px;
+`;
+
 const Summary = styled.div`
   flex: 1;
   border: 0.5px solid lightgray;
@@ -154,6 +163,20 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+
+
+
+
+
+
+  const handleDelete = () => {
+    dispatch(clearCart());
+  };
+
+
   return (
     <Container>
       <Announcement />
@@ -165,66 +188,54 @@ const Cart = () => {
           <TopTexts>
             <TopText>KORÁS TARTALMA(2)</TopText>
           </TopTexts>
+          <TopButton onClick={handleDelete} type="filled">
+            KOSÁR TÖRLÉSE
+          </TopButton>
           <TopButton type="filled">FIZETÉS</TopButton>
         </Top>
         <Bottom>
-          <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> PÖRGETŐ
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductSize>
-                    <b>KOFFEIN:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
+          <Info >
+          <Empty style={cart.total !== 0 ? { display: "none" } : {}}>
+              A kosár üres!
+            </Empty>
+
+            {cart.products.map((product) => (
+              <Product>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Termék neve:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>Termék azonosító:</b> {product._id}
+                    </ProductId>
+                   
+                   
+                    <ProductSize
+                      
+                    >
+                      <b>Választott mennyiség:</b> {product.quantitygram}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://muscleworld.hu/wp-content/uploads/2024/05/2250023000.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> PÖRGETŐ
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>KOFFEIN:</b> 1221
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 20</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>RENDELÉS ÖSSZEGZÉSE</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>TERMÉKEK ÁRA</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total} Ft</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>SZÁLLITÁSI DIJ</SummaryItemText>
@@ -236,7 +247,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>TELJES ÁR</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total}</SummaryItemPrice>
             </SummaryItem>
             <Button>FIZETÉS</Button>
           </Summary>

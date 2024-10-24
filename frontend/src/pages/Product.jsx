@@ -7,6 +7,8 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../redux/cartRedux";
 
 
 
@@ -126,6 +128,7 @@ const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [quantitygram, setQuantitygram] = useState("");
+  const dispatch = useDispatch();
 
 
 
@@ -145,6 +148,10 @@ const Product = () => {
     } else {
       setQuantity(quantity + 1);
     }
+  };
+
+  const handleClick = () => {
+    dispatch(addProduct({ ...product, quantity, quantitygram}));
   };
 
 
@@ -196,7 +203,7 @@ const Product = () => {
                 
               />
             </AmountContainer>
-            <Button
+            <Button onClick={handleClick}
            
 
             >

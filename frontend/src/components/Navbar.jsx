@@ -3,6 +3,7 @@ import { ShoppingCartOutlined, Menu, KeyboardArrowDown } from "@material-ui/icon
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const jumpEffect = keyframes`
   0% {
@@ -161,6 +162,7 @@ const DropdownMenuMobile = styled(DropdownMenu)`
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const quantity = useSelector((state) => state.cart.quantity);
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
@@ -202,7 +204,7 @@ const Navbar = () => {
           </MenuItem>
           <MenuItem>
             <Link to="/cart">
-              <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
             </Link>
