@@ -224,7 +224,7 @@ const Cart = () => {
                     <ProductAmount>{product.quantity}</ProductAmount>
                   </ProductAmountContainer>
                   <ProductPrice>
-                    $ {product.price * product.quantity}
+                    {product.price * product.quantity} Ft
                   </ProductPrice>
                 </PriceDetail>
               </Product>
@@ -239,11 +239,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>SZÁLLITÁSI DIJ</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>KEDVEZMÉNY</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemPrice>0 Ft</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>TELJES ÁR</SummaryItemText>
