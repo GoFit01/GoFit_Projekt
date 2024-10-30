@@ -1,5 +1,4 @@
 const router = require("express").Router();
-//const stripe = require("stripe")("sk_test_51KTYWpB1bb1VrKRicJIe3qIxKe2OJ5dG09RPnmIdV1Bvi2i635A7MwDWQW5gAPieC9B2hLaFt4yfAenYqgeeE0Jg00RsE3xPOe");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 

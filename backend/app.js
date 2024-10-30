@@ -14,6 +14,8 @@ const stripeRoute = require("./routes/stripe");
 dotenv.config(); //env fileból toltes
 
 
+
+
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGO_URL)

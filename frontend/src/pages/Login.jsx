@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { mobile } from "../responsive"; 
 import { Link as RouterLink } from "react-router-dom"; 
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/apiCalls";
 
 const Container = styled.div`
   width: 100vw;
@@ -99,14 +102,33 @@ const StyledLink = styled(RouterLink)`
 `;
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.user);
+  const handleClick = (e) => {
+    e.preventDefault(); //ne refreshelje az oldalt
+    login(dispatch, { username, password });
+  };
+
+
   return (
     <Container>
       <Wrapper>
         <Title>BEJELENTKEZÉS</Title>
         <Form>
-          <Input placeholder="felhasználónév" />
-          <Input placeholder="jelszó" />
-          <Button>BEJELENTKEZÉS</Button>
+        <Input
+            required
+            placeholder="felhasználónév"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            required
+            type={"password"}
+            placeholder="jelszó"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+         <Button onClick={handleClick}>BEJELENTKEZÉS</Button>
           <StyledLink to="/register">REGISZTRÁCIÓ</StyledLink>
         </Form>
         <StyledLink to="/">VISSZA A FŐOLDALRA</StyledLink>
