@@ -7,6 +7,12 @@ import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { clearCart } from "../redux/cartRedux";
+import StripeCheckout from "react-stripe-checkout";
+import { userRequest } from "../requestMethods";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
@@ -165,8 +171,28 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [stripeToken, setStripeToken] = useState(null);
+  const history = useHistory();
 
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
 
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: cart.total*100,
+        });
+        history.push("/success", {
+          stripeData: res.data,
+          products: cart,
+        });
+      } catch {}
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, cart.total, history, cart]);
 
 
 
@@ -245,7 +271,20 @@ const Cart = () => {
               <SummaryItemText>TELJES ÁR</SummaryItemText>
               <SummaryItemPrice>{cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>FIZETÉS</Button>
+            <StripeCheckout
+              name="GOFIT"
+              image="https://github.com/fzksbalazs.png"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button style={cart.total === 0 ? { display: "none" } : {}}>
+                MEGRENDELÉS
+              </Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
