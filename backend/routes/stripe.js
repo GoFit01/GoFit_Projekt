@@ -1,6 +1,6 @@
 const router = require("express").Router();
 require("dotenv").config();
-const stripe = require("stripe")("sk_test_51Q8gHHE0Esp4B2xrF11xgYxYezWxwroI4zJYCmoApIeCW48Fty1Cd7SMYVqVh6ktPD7DbQUulmy1pUtI4KzE0qZU00qWGO01lX");
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 
 router.post("/payment", (req, res) => {
