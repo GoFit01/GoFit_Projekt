@@ -105,7 +105,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.user);
+  const { isFetching, error } = useSelector((state) => state.user);
   const handleClick = (e) => {
     e.preventDefault(); //ne refreshelje az oldalt
     login(dispatch, { username, password });
@@ -128,7 +128,7 @@ const Login = () => {
             placeholder="jelszó"
             onChange={(e) => setPassword(e.target.value)}
           />
-         <Button onClick={handleClick}>BEJELENTKEZÉS</Button>
+         <Button onClick={handleClick} disabled={isFetching}>BEJELENTKEZÉS</Button>
           <StyledLink to="/register">REGISZTRÁCIÓ</StyledLink>
         </Form>
         <StyledLink to="/">VISSZA A FŐOLDALRA</StyledLink>

@@ -4,23 +4,23 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "nodemon app.js",
-      "start-server": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
   },
   "author": "Fazekas Balázs, Takács Marcell, Székely Áron",
   "license": "ISC",
   "devDependencies": {
-      "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4"
   },
   "dependencies": {
-      "cors": "^2.8.5",
-      "crypto-js": "^4.1.1",
-      "dotenv": "^16.0.0",
-      "ejs": "^2.6.1",
-      "express": "^4.17.2",
-      "jsonwebtoken": "^8.5.1",
-      "mongoose": "^6.2.1",
-      "stripe": "^8.202.0"
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^2.6.1",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.1",
+    "stripe": "^8.202.0"
   }
 }

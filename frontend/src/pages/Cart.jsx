@@ -1,4 +1,3 @@
-import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -12,7 +11,7 @@ import { userRequest } from "../requestMethods";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
-const KEY = process.env.REACT_APP_STRIPE;
+const KEY = "pk_test_51Q8gHHE0Esp4B2xrgdSNPaGgO0Q7gzgWPWxzyYgO9QGJr8FX8OPdguVwVJr876FYqYU3Uo2HWzKCnZYLXUoWhlP600K4RbQXYg";
 
 const Container = styled.div``;
 
