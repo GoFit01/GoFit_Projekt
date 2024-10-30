@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { Logout } from "../redux/apiCalls";
 
 const jumpEffect = keyframes`
   0% {
@@ -163,9 +165,19 @@ const DropdownMenuMobile = styled(DropdownMenu)`
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const quantity = useSelector((state) => state.cart.quantity);
+  const history = useHistory();
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
+
+  };
+
+  const handleLogout = (e) => {
+    localStorage.clear();
+    Logout(dispatch);
+    history.push("/");
   };
 
   return (
@@ -196,11 +208,22 @@ const Navbar = () => {
               <Link to="/webshop">WEBSHOP</Link>
             </DropdownMenu>
           </MenuItem>
-          <MenuItem>
-            <Link to="/login">BEJELENTKEZÉS</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/register">REGISZTRÁCIÓ</Link>
+          <Link style={{ textDecoration: "none" }} to={"/register"}>
+            <MenuItem style={user ? { display: "none" } : {}}>
+              REGISZTRÁCIÓ
+            </MenuItem>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to={"/login"}>
+            <MenuItem style={user ? { display: "none" } : {}}>
+              BEJELENTKEZÉS
+            </MenuItem>
+          </Link>
+
+          <MenuItem
+            style={!user ? { display: "none" } : {}}
+            onClick={(e) => handleLogout(e)}
+          >
+            KIJELENTKEZÉS
           </MenuItem>
           <MenuItem>
             <Link to="/cart">
