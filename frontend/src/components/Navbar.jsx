@@ -99,13 +99,14 @@ const MenuItem = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  color: black; 
 
   @media only screen and (max-width: 768px) {
     display: none;
   }
 
   a {
-    color: black;
+    color: black; 
     text-decoration: none;
     padding: 10px;
     display: flex;

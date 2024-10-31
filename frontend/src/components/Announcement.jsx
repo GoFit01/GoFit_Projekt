@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Announcement = () => {
-  return <Container>Szuper akció! Ingyenes szállítás 10.000Ft felett</Container>;
+  return <Container>Ingyenes szállítás 2024 december 31-ig!</Container>;
 };
 
 export default Announcement;

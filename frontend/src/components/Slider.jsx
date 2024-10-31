@@ -128,7 +128,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Link to="edzestrevek">
+              <Link to="edzestervek">
                 <Button>
                   UGRÁS AZ EDZÉSSEKHEZ
                 </Button>

@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import WebShop from "./pages/Webshop";
 import Success from "./pages/Success";
+import WorkoutPlans from "./pages/Workoutplans";
 import { useSelector } from "react-redux";
 
 import {
@@ -15,6 +16,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+
 
 const App = () => {
   const user = useSelector(state=> state.user.currentUser);
@@ -45,7 +47,10 @@ const App = () => {
         </Route>
         <Route path="/webshop">
         <WebShop/>
-        </Route>      
+        </Route>
+        <Route path="/edzestervek">
+        <WorkoutPlans/>
+        </Route>       
       </Switch>
     </Router>
 );
