@@ -58,13 +58,21 @@ const Slide = styled.div`
 
 const ImgContainer = styled.div`
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100%;
 `;
 
 const Image = styled.img`
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+  width: 80%;      
+  max-width: 400px;
+  height: auto;    
+  max-height: 400px;
+
+  @media (max-width: 768px) {
+    width: 90%;    
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -134,37 +142,37 @@ const Slider = () => {
         <Wrapper slideIndex={slideIndex}>
           <Slide bg="#f5f5f5">
             <ImgContainer>
-              <Image src="https://via.placeholder.com/800x600" />
+              <Image src="https://www.scitecshop.hu/uploads/product/2427/8MyPfpIF.png" />
             </ImgContainer>
             <InfoContainer>
-              <Title>Featured Product 1</Title>
-              <Desc>Best product in the market</Desc>
-              <Link to="feherjek">
-              <Button>Shop Now</Button>
+              <Title>Mások ezt választják</Title>
+              <Desc>Kreatin monohidrát</Desc>
+              <Link to="product/6717b206f48d89ca19496aa0">
+              <Button>Ugrás a termékhez</Button>
               </Link>
             </InfoContainer>
           </Slide>
           <Slide bg="#f0f0f0">
             <ImgContainer>
-              <Image src="https://via.placeholder.com/800x600" />
+              <Image src="https://scitec.hu/images/product_images/4810_2275fdf657a2.webp" />
             </ImgContainer>
             <InfoContainer>
-              <Title>Featured Product 2</Title>
-              <Desc>Don't miss this offer</Desc>
-              <Link to="webshop">
-              <Button>Shop Now</Button>
+              <Title>Mások ezt választják</Title>
+              <Desc>Whey fehérje</Desc>
+              <Link to="product/67090b845ee0250c066b8a31">
+              <Button>Ugrás a termékhez</Button>
               </Link>
             </InfoContainer>
           </Slide>
           <Slide bg="#e0e0e0">
             <ImgContainer>
-              <Image src="https://via.placeholder.com/800x600" />
+              <Image src="https://shop.biotechusa.hu/cdn/shop/files/Multivitamin_ForMen_60tabs_250ml_600x600_1d94d60f-6704-4693-9250-053935dafa1a_grande.png?v=1718715272" />
             </ImgContainer>
             <InfoContainer>
-              <Title>Featured Product 3</Title>
-              <Desc>Quality at its best</Desc>
-              <Link to="webshop">
-              <Button>Shop Now</Button>
+              <Title>Mások ezt választják</Title>
+              <Desc>Multivitamin férfiaknak</Desc>
+              <Link to="product/6717b2c3f48d89ca19496aa4">
+              <Button>Ugrás a termékhez</Button>
               </Link>
             </InfoContainer>
           </Slide>

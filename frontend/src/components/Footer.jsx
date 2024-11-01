@@ -127,25 +127,25 @@ import {
               </Link>       
             </ListItem>
             <ListItem>
-              <Link to='/cart' style={{textDecoration:"none", color:"black"}}>
-                Kosár
-              </Link>       
-            </ListItem>
-            <ListItem>
-              <Link to='/products/feherjek' style={{textDecoration:"none", color:"black"}}>
+              <Link to='/products/feherje' style={{textDecoration:"none", color:"black"}}>
                 Feherjék
               </Link>       
             </ListItem>
             <ListItem>
-              <Link to='/products/kreatinok' style={{textDecoration:"none", color:"black"}}>
+              <Link to='/products/kreatin' style={{textDecoration:"none", color:"black"}}>
                 Kreatinok
               </Link>       
             </ListItem>
             <ListItem>
-              <Link to='/products/vitaminok' style={{textDecoration:"none", color:"black"}}>
+              <Link to='/products/vitamin' style={{textDecoration:"none", color:"black"}}>
                 Vitaminok
               </Link>       
-            </ListItem>   
+            </ListItem>  
+            <ListItem>
+              <Link to='/cart' style={{textDecoration:"none", color:"black"}}>
+                Kosár
+              </Link>       
+            </ListItem> 
           </List>
         </Center>
         <Right>

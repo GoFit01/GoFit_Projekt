@@ -93,32 +93,33 @@ const Right = styled.div`
 `;
 
 const MenuItem = styled.div`
-  font-size: 14px;
+   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
   position: relative;
   display: flex;
   align-items: center;
   color: black; 
+  transition: color 0.3s;
+
+  &:hover {
+    color: teal; 
+  }
+
+  &:hover > div {
+    display: flex; 
+  }
 
   @media only screen and (max-width: 768px) {
     display: none;
   }
 
   a {
-    color: black; 
+    color: inherit; 
     text-decoration: none;
     padding: 10px;
     display: flex;
     align-items: center;
-  }
-
-  a:hover {
-    color: teal; 
-  }
-
-  &:hover > div {
-    display: flex;
   }
 `;
 

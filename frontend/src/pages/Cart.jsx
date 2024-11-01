@@ -30,6 +30,11 @@ const Top = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  ${mobile({
+    flexDirection: "column",       
+    gap: "10px",                   
+    alignItems: "center"           
+  })}
 `;
 
 const TopButton = styled.button`
@@ -210,9 +215,6 @@ const Cart = () => {
         <Title>KOSÁR</Title>
         <Top>
           <TopButton>VÁSÁRLÁS FOLYTATÁSA</TopButton>
-          <TopTexts>
-            <TopText>KORÁS TARTALMA(2)</TopText>
-          </TopTexts>
           <TopButton onClick={handleDelete} type="filled">
             KOSÁR TÖRLÉSE
           </TopButton>
