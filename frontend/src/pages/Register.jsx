@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import { mobile } from "../responsive"; 
-import { Link as RouterLink } from "react-router-dom"; 
+import { mobile } from "../responsive";
+import { Link as RouterLink } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
   width: 100vw;
@@ -17,9 +20,9 @@ const Container = styled.div`
   justify-content: center;
 
   ${mobile({
-    width: "100vw", 
+    width: "100vw",
     height: "100vh",
-    padding: "10px", 
+    padding: "10px",
   })}
 `;
 
@@ -30,10 +33,10 @@ const Wrapper = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 
   ${mobile({
-    width: "85%", 
+    width: "85%",
     padding: "15px",
     borderRadius: "10px",
   })}
@@ -42,15 +45,15 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 300;
-  text-align: center; 
+  text-align: center;
 
-  ${mobile({ fontSize: "20px" })} 
+  ${mobile({ fontSize: "20px" })}
 `;
 
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
   width: 100%;
 `;
 
@@ -60,10 +63,11 @@ const Input = styled.input`
   margin: 20px 10px 0px 0px;
   padding: 10px;
   border: 1px solid gray;
-  border-radius: 5px; 
+  border-radius: 5px;
+
   ${mobile({
-    minWidth: "80%", 
-    margin: "10px 0", 
+    minWidth: "80%",
+    margin: "10px 0",
     padding: "8px",
   })}
 `;
@@ -71,12 +75,13 @@ const Input = styled.input`
 const Agreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
-  text-align: center; 
-  ${mobile({ fontSize: "11px" })} 
+  text-align: center;
+
+  ${mobile({ fontSize: "11px" })}
 `;
 
 const Button = styled.button`
-  width: 50%; 
+  width: 50%;
   border: none;
   padding: 15px 20px;
   background-color: teal;
@@ -91,8 +96,8 @@ const Button = styled.button`
   }
 
   ${mobile({
-    width: "60%", 
-    padding: "12px", 
+    width: "60%",
+    padding: "12px",
     fontSize: "14px",
   })}
 `;
@@ -108,24 +113,50 @@ const StyledLink = styled(RouterLink)`
 `;
 
 const Register = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("A jelszavak nem egyeznek.");
+      return;
+    }
+    try {
+      const res = await publicRequest.post("/auth/register", {
+        username,
+        email,
+        password,
+      });
+      console.log("Sikeres regisztráció:", res.data);
+    } catch (err) {
+      setError("Hiba történt a regisztráció során.");
+      console.error(err);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>REGISZTRÁCIÓ</Title>
-        <Form>
-          <Input placeholder="vezetéknév" />
-          <Input placeholder="keresztnév" />
-          <Input placeholder="felhasználónév" />
-          <Input placeholder="email" />
-          <Input placeholder="jelszó" />
-          <Input placeholder="jelszó megerősítése" />
-          
+        <Form onSubmit={handleSubmit}>
+          <Input placeholder="felhasználónév" onChange={(e) => setUsername(e.target.value)} />
+          <Input placeholder="email" type="email" onChange={(e) => setEmail(e.target.value)} />
+          <Input placeholder="jelszó" type="password" onChange={(e) => setPassword(e.target.value)} />
+          <Input placeholder="jelszó megerősítése" type="password" onChange={(e) => setConfirmPassword(e.target.value)} />
+
           <Agreement>
             A fiók létrehozásával hozzájárulok személyes adataim feldolgozásához.
             <b> ADATKEZELÉSI TÁJÉKOZATÓ</b>
           </Agreement>
-          
-          <Button>REGISZTÁCIÓ</Button>
+
+          {error && <span style={{ color: "red" }}>{error}</span>}
+          <Button type="submit">REGISZTRÁCIÓ</Button>
         </Form>
         <StyledLink to="/">VISSZA A FŐOLDALRA</StyledLink>
       </Wrapper>

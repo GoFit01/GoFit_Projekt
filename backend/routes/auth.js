@@ -27,18 +27,21 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    // Ellenőrizd, hogy létezik-e a felhasználó
     const user = await User.findOne({ username: req.body.username });
+    if (!user) {
+      return res.status(401).json("Wrong username or password!");
+    }
 
-    const hashedPassword = CryptoJS.AES.decrypt(
-      user.password,
-      process.env.PASS_SEC
-    );
-
+    // Jelszó dekódolása és ellenőrzése
+    const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-    OriginalPassword !== req.body.password &&
-      res.status(401).json("Wrong password!");
+    if (OriginalPassword !== req.body.password) {
+      return res.status(401).json("Wrong username or password!");
+    }
 
+    // JWT token generálása
     const accessToken = jwt.sign(
       {
         id: user._id,
@@ -52,7 +55,7 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json({ ...others, accessToken });
   } catch (err) {
-    res.status(500).json;
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 

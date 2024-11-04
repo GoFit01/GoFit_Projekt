@@ -187,7 +187,7 @@ const Navbar = () => {
       <Wrapper>
         <Left>
           <Profile>
-            <Link to="/profile">PROFIL</Link> 
+            <Link to="/profile" style={!user ? { display: "none" } : {}}>PROFIL</Link> 
           </Profile>
         </Left>
         <Center>
@@ -199,13 +199,13 @@ const Navbar = () => {
           <HamburgerMenu onClick={handleMenuClick}>
             <Menu style={{ fontSize: "24px" }} />
           </HamburgerMenu>
-          <MenuItem>
+          <MenuItem style={!user ? { display: "none" } : {}}>
             <Link>
               EDZÉS
               <KeyboardArrowDown style={{ fontSize: "16px", marginLeft: "5px" }} />
             </Link>
-            <DropdownMenu>
-              <Link to="/edzestervek">EDZÉSTERVEK</Link>
+            <DropdownMenu >
+              <Link to="/edzestervek" >EDZÉSTERVEK</Link>
               <Link to="/taplalkozas">TÁPLÁLKOZÁS</Link>
               <Link to="/webshop">WEBSHOP</Link>
             </DropdownMenu>
@@ -229,7 +229,7 @@ const Navbar = () => {
           </MenuItem>
           <MenuItem>
             <Link to="/cart">
-            <Badge badgeContent={quantity} color="primary">
+            <Badge badgeContent={quantity} color="primary" style={!user ? { display: "none" } : {}}>
                 <ShoppingCartOutlined />
               </Badge>
             </Link>

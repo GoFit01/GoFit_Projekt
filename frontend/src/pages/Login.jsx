@@ -101,6 +101,13 @@ const StyledLink = styled(RouterLink)`
   ${mobile({ fontSize: "12px" })} 
 `;
 
+const ErrorMessage = styled.span`
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+`;
+
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -128,7 +135,8 @@ const Login = () => {
             placeholder="jelszó"
             onChange={(e) => setPassword(e.target.value)}
           />
-         <Button onClick={handleClick} disabled={isFetching}>BEJELENTKEZÉS</Button>
+         <Button onClick={handleClick} >BEJELENTKEZÉS</Button>
+         {error && <ErrorMessage>Hibás felhasználónév vagy jelszó!</ErrorMessage>}
           <StyledLink to="/register">REGISZTRÁCIÓ</StyledLink>
         </Form>
         <StyledLink to="/">VISSZA A FŐOLDALRA</StyledLink>
