@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/cartRedux";
+import axios from "axios";
 
-const Wrapper = styled.div`
-
-`;
+const Wrapper = styled.div``;
 const Container = styled.div`
   padding: 20px;
   background-color: #f5f5f5;
@@ -142,53 +143,39 @@ const InfoButton = styled.button`
 `;
 
 const WorkoutPlans = () => {
-  
+  const [plans, setPlans] = useState([]);
   const [selectedPlans, setSelectedPlans] = useState([]);
+  const [quantity, setQuantity] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({});
+  const dispatch = useDispatch();
 
-  
-  const plans = [
-    {
-      id: 1,
-      title: "Alap edzésterv",
-      description: "Egyszerű gyakorlatok a mindennapokra.",
-      price: "5000 Ft",
-      img: "https://www.nourishmovelove.com/wp-content/uploads/2023/12/BeginnerWorkoutPlanHero.jpg",
-      detailedInfo: "Ez az alap edzésterv segít az általános fitnesz szinten tartásában...",
-    },
-    {
-      id: 2,
-      title: "Haladó edzésterv",
-      description: "Intenzív gyakorlatok haladóknak.",
-      price: "7000 Ft",
-      img: "https://www.nourishmovelove.com/wp-content/uploads/2022/04/4WeekChallenge2.jpg",
-      detailedInfo: "Ez az edzésterv ideális haladó edzők számára...",
-    },
-    {
-      id: 3,
-      title: "Személyre szabott edzésterv",
-      description: "Személyre szabott gyakorlatok.",
-      price: "10000 Ft",
-      img: "https://www.nourishmovelove.com/wp-content/uploads/2022/04/4WeekChallenge3.jpg",
-      detailedInfo: "Ez a személyre szabott edzésterv teljesen a te igényeidhez igazodik...",
-    },
-  ];
+  useEffect(() => {
+    const getWorkoutPlans = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/workoutPlans");
+        setPlans(res.data);
+      } catch (err) {
+        console.error("Error fetching workout plans:", err);
+      }
+    };
+    getWorkoutPlans();
+  }, []);
 
-  
   const handleAddToCart = () => {
-    const selectedItems = plans.filter((plan) => selectedPlans.includes(plan.id));
-    alert(`Kosárhoz adva: ${selectedItems.map((item) => item.title).join(", ")}`);
+    selectedPlans.forEach((planId) => {
+      const selectedPlan = plans.find((plan) => plan._id === planId);
+      dispatch(addProduct({ ...selectedPlan, quantity }));
+    });
+    alert("Kosárhoz adva!");
   };
 
-  
   const togglePlanSelection = (id) => {
     setSelectedPlans((prev) =>
       prev.includes(id) ? prev.filter((planId) => planId !== id) : [...prev, id]
     );
   };
 
-  
   const handleInfoClick = (plan) => {
     setModalContent(plan);
     setShowModal(true);
@@ -200,40 +187,40 @@ const WorkoutPlans = () => {
 
   return (
     <Wrapper>
-    <Announcement/>
-    <Navbar/>
-    <Container>
-      <Title>Válassz edzéstervet</Title>
-      <PlanList>
-        {plans.map((plan) => (
-          <PlanContainer
-            key={plan.id}
-            onClick={() => togglePlanSelection(plan.id)}
-            selected={selectedPlans.includes(plan.id)}
-          >
-            <PlanImage src={plan.img} alt={plan.title} />
-            <PlanTitle>{plan.title}</PlanTitle>
-            <PlanDescription>{plan.description}</PlanDescription>
-            <PlanPrice>{plan.price}</PlanPrice>
-            <InfoButton onClick={(e) => { e.stopPropagation(); handleInfoClick(plan); }}>Info</InfoButton>
-          </PlanContainer>
-        ))}
-      </PlanList>
-      <ButtonContainer>
-        <AddToCartButton onClick={handleAddToCart}>Kosárhoz adás</AddToCartButton>
-      </ButtonContainer>
+      <Announcement />
+      <Navbar />
+      <Container>
+        <Title>Válassz edzéstervet</Title>
+        <PlanList>
+          {plans.map((plan) => (
+            <PlanContainer
+              key={plan._id}
+              onClick={() => togglePlanSelection(plan._id)}
+              selected={selectedPlans.includes(plan._id)}
+            >
+              <PlanImage src={plan.img} alt={plan.title} />
+              <PlanTitle>{plan.title}</PlanTitle>
+              <PlanDescription>{plan.description}</PlanDescription>
+              <PlanPrice>{plan.price} Ft</PlanPrice>
+              <InfoButton onClick={(e) => { e.stopPropagation(); handleInfoClick(plan); }}>Info</InfoButton>
+            </PlanContainer>
+          ))}
+        </PlanList>
+        <ButtonContainer>
+          <AddToCartButton onClick={handleAddToCart}>Kosárhoz adás</AddToCartButton>
+        </ButtonContainer>
 
-      {showModal && (
-        <ModalBackground>
-          <ModalContainer>
-            <CloseButton onClick={closeModal}>Bezár</CloseButton>
-            <h2>{modalContent.title}</h2>
-            <p>{modalContent.detailedInfo}</p>
-          </ModalContainer>
-        </ModalBackground>
-      )}
-    </Container>
-    <Footer/>
+        {showModal && (
+          <ModalBackground>
+            <ModalContainer>
+              <CloseButton onClick={closeModal}>Bezár</CloseButton>
+              <h2>{modalContent.title}</h2>
+              <p>{modalContent.detailedInfo}</p>
+            </ModalContainer>
+          </ModalBackground>
+        )}
+      </Container>
+      <Footer />
     </Wrapper>
   );
 };

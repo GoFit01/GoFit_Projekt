@@ -191,7 +191,7 @@ const Cart = () => {
           tokenId: stripeToken.id,
           amount: cart.total*100,
         });
-        dispatch(clearCart());
+        
         history.replace("/success", {
           stripeData: res.data,
           products: cart,
@@ -208,6 +208,7 @@ const Cart = () => {
   const handleDelete = () => {
     dispatch(clearCart());
   };
+
 
 
   return (
