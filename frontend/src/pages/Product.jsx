@@ -200,6 +200,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add
                 style={{ cursor: "pointer" }}
+                onClick={() => handleQuantity("inc")}
                 
               />
             </AmountContainer>

@@ -34,6 +34,7 @@ const Success = (e) => {
         });
         console.log(res.data);
         setOrderId(res.data._id);
+        
       } catch (err) {
         console.log(err);
       }
@@ -41,6 +42,19 @@ const Success = (e) => {
     data && createOrder();
   }, [cart, data, currentUser]);
 
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href);
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href);
+    };
+    window.addEventListener("popstate", handlePopState);
+    
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
+  
   return (
     <div
       style={{
@@ -52,8 +66,8 @@ const Success = (e) => {
       }}
     >
       {orderId
-        ? `Order has been created successfully. Your order number is ${orderId}`
-        : `Successfull. Your order is being prepared...`}
+        ? `A rendelésed sikeres! A rendelés azonositod : ${orderId} `
+        : ``}
 
       <button onClick={handleDelete} style={{ padding: 10, marginTop: 20 }}>
         Menjünk a főoldalra

@@ -4,6 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { publicRequest } from "../requestMethods";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -120,6 +121,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,6 +136,8 @@ const Register = () => {
         password,
       });
       console.log("Sikeres regisztráció:", res.data);
+      history.push("/login");
+      
     } catch (err) {
       setError("Hiba történt a regisztráció során.");
       console.error(err);
