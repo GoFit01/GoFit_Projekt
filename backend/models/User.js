@@ -9,7 +9,10 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    img:{type: String}
+    img:{type: String},
+    weight: { type: Number },    
+    height: { type: Number },    
+    gender: { type: String },    
   },
   { timestamps: true }
 );

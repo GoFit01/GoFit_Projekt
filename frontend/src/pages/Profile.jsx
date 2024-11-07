@@ -4,6 +4,10 @@ import { AccountCircle } from "@material-ui/icons";
 import Footer from "../components/Footer";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
+import { useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { publicRequest, userRequest } from "../requestMethods"; // userRequest for authenticated requests
+import { loginSuccess } from "../redux/userRedux"; // To update user data in Redux
 
 const Container = styled.div`
   display: flex;
@@ -108,14 +112,29 @@ const Button = styled.button`
 `;
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.currentUser); // Retrieve current user data from Redux
+
   const [profileData, setProfileData] = useState({
-    name: "Teszt Felhasználó",
-    email: "teszt@felhasznalo.com",
+    name: user?.username || "",
+    email: user?.email || "",
     password: "",
-    weight: "",
-    height: "",
-    gender: "",
+    weight: user?.weight || "",
+    height: user?.height || "",
+    gender: user?.gender || "",
   });
+
+  useEffect(() => {
+    if (user) {
+      setProfileData({
+        name: user.username,
+        email: user.email,
+        weight: user.weight,
+        height: user.height,
+        gender: user.gender,
+      });
+    }
+  }, [user]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -125,15 +144,20 @@ const Profile = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(profileData);
-    alert("Profil adatokat sikeresen frissítetted!");
+    try {
+      const res = await userRequest.put(`/users/${user._id}`, profileData);
+      dispatch(loginSuccess(res.data)); // Update Redux with new user data
+      alert("Profil adatokat sikeresen frissítetted!");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
   };
 
   return (
     <>
-      <Announcement/>
+      <Announcement />
       <Navbar />
       <Container>
         <Title>Profil Adataid</Title>
