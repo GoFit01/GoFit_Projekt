@@ -8,6 +8,7 @@ import Cart from "./pages/Cart";
 import WebShop from "./pages/Webshop";
 import Success from "./pages/Success";
 import WorkoutPlans from "./pages/Workoutplans";
+import Nutrition from "./pages/Nutrition";
 import { useSelector } from "react-redux";
 
 import {
@@ -50,7 +51,10 @@ const App = () => {
         </Route>
         <Route path="/edzestervek">
         <WorkoutPlans/>
-        </Route>       
+        </Route>
+        <Route path="/taplalkozas">
+        <Nutrition/>
+        </Route>        
       </Switch>
     </Router>
 );
