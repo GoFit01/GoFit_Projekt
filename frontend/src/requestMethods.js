@@ -1,17 +1,25 @@
 import axios from "axios";
 
 const BASE_URL = "http://localhost:5000/api/";
- const TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken || "";
 
-const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
-const currentUser = user && JSON.parse(user).currentUser;
-//const TOKEN = currentUser?.accessToken;
+const getToken = () => {
+    try {
+        const persistRoot = JSON.parse(localStorage.getItem("persist:root"));
+        const user = persistRoot && JSON.parse(persistRoot.user);
+        return user && user.currentUser && user.currentUser.accessToken;
+    } catch (error) {
+        console.error("Token retrieval error: ", error);
+        return null;
+    }
+};
+
+const TOKEN = getToken();
 
 export const publicRequest = axios.create({
-  baseURL: BASE_URL,
+    baseURL: BASE_URL,
 });
 
 export const userRequest = axios.create({
-  baseURL: BASE_URL,
-  headers: { Authorization: `Bearer ${TOKEN}` },
+    baseURL: BASE_URL,
+    headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {},
 });
