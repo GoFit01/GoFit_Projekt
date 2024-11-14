@@ -1,3 +1,5 @@
+
+
 import axios from "axios";
 
 const BASE_URL = "http://localhost:5000/api/";
@@ -13,13 +15,26 @@ const getToken = () => {
     }
 };
 
-const TOKEN = getToken();
-
 export const publicRequest = axios.create({
     baseURL: BASE_URL,
 });
 
-export const userRequest = axios.create({
+const userRequest = axios.create({
     baseURL: BASE_URL,
-    headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {},
 });
+
+// Minden kéréshez automatikusan hozzáadja az Authorization fejlécet
+userRequest.interceptors.request.use(
+    (config) => {
+        const token = getToken();
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+export { userRequest };
