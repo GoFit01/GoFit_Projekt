@@ -1,38 +1,21 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "http://localhost:5000/api/";
+// const TOKEN =
+//   JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser
+//     .accessToken || "";
 
-const getToken = () => {
-    try {
-        const persistRoot = JSON.parse(localStorage.getItem("persist:root"));
-        if (!persistRoot) return null; 
-        
-        const user = JSON.parse(persistRoot.user);
-        return user?.currentUser?.accessToken || null;
-    } catch (error) {
-        console.error("Token retrieval error:", error);
-        return null;
-    }
-};
-
-export const userRequest = axios.create({
-    baseURL: BASE_URL,
-    headers: {
-        Authorization: `Bearer ${getToken()}`,
-    },
-});
+const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
+const currentUser = user && JSON.parse(user).currentUser;
+const TOKEN = currentUser?.accessToken;
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
 });
 
-userRequest.interceptors.request.use(
-    (config) => {
-        const token = getToken();
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    },
-    (error) => Promise.reject(error)
-);
+export const userRequest = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    Authorization: `Bearer ${TOKEN}`, // Ügyelj arra, hogy a token a megfelelő formátumban legyen
+  },
+});
