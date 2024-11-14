@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link as RouterLink } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { useHistory } from "react-router-dom";
@@ -114,8 +113,6 @@ const StyledLink = styled(RouterLink)`
 `;
 
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

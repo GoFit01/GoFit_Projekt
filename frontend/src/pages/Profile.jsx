@@ -6,8 +6,9 @@ import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import { useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { publicRequest, userRequest } from "../requestMethods"; // userRequest for authenticated requests
+import { userRequest } from "../requestMethods"; // userRequest for authenticated requests
 import { loginSuccess } from "../redux/userRedux"; // To update user data in Redux
+import Modal from "../components/Modal"
 
 const Container = styled.div`
   display: flex;
@@ -113,7 +114,7 @@ const Button = styled.button`
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.currentUser); // Retrieve current user data from Redux
+  const user = useSelector((state) => state.user.currentUser); 
 
   const [profileData, setProfileData] = useState({
     name: user?.username || "",
@@ -123,6 +124,8 @@ const Profile = () => {
     height: user?.height || "",
     gender: user?.gender || "",
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -148,12 +151,14 @@ const Profile = () => {
     e.preventDefault();
     try {
       const res = await userRequest.put(`/users/${user._id}`, profileData);
-      dispatch(loginSuccess(res.data)); // Update Redux with new user data
-      alert("Profil adatokat sikeresen frissítetted!");
+      dispatch(loginSuccess(res.data)); 
+      setShowModal(true);
     } catch (error) {
       console.error("Error updating profile:", error);
     }
   };
+
+ 
 
   return (
     <>
@@ -223,6 +228,13 @@ const Profile = () => {
         </ProfileFormContainer>
       </Container>
       <Footer />
+       {/* Modal megjelenítése, ha showModal igaz */}
+       {showModal && (
+        <Modal
+          message="Profil adatokat sikeresen frissítetted!"
+          onClose={() => setShowModal(false)} 
+          />
+           )}
     </>
   );
 };

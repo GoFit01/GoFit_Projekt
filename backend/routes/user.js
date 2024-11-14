@@ -8,8 +8,7 @@ const {
 const router = require("express").Router();
 
 //UPDATE
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
-
+router.put("/:id", verifyToken, async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
@@ -26,6 +25,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
       { new: true }
     );
     res.status(200).json(updatedUser);
+    return; // Visszatérés a válasz után
   } catch (err) {
     res.status(500).json(err);
   }

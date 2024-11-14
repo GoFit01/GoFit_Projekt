@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { clearCart } from "../redux/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
 import { userRequest } from "../requestMethods";
@@ -47,14 +46,6 @@ const TopButton = styled.button`
   color: ${(props) => props.type === "filled" && "white"};
 `;
 
-const TopTexts = styled.div`
-  ${mobile({ display: "none" })}
-`;
-const TopText = styled.span`
-  text-decoration: underline;
-  cursor: pointer;
-  margin: 0px 10px;
-`;
 
 const Bottom = styled.div`
   display: flex;
@@ -93,12 +84,6 @@ const ProductName = styled.span``;
 
 const ProductId = styled.span``;
 
-const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-`;
 
 const ProductSize = styled.span``;
 
@@ -231,35 +216,34 @@ const Cart = () => {
             </Empty>
 
             {cart.products.map((product) => (
-              <Product>
-                <ProductDetail>
-                  <Image src={product.img} />
-                  <Details>
-                    <ProductName>
-                      <b>Termék neve:</b> {product.title}
-                    </ProductName>
-                    <ProductId>
-                      <b>Termék azonosító:</b> {product._id}
-                    </ProductId>
-                   
-                   
-                    <ProductSize
-                      
-                    >
-                      <b>Választott mennyiség:</b> {product.quantitygram}
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                  </ProductAmountContainer>
-                  <ProductPrice>
-                    {product.price * product.quantity} Ft
-                  </ProductPrice>
-                </PriceDetail>
-              </Product>
-            ))}
+  <Product key={product._id}>
+    <ProductDetail>
+      <Image src={product.img} />
+      <Details>
+        <ProductName>
+          <b>Termék neve:</b> {product.title}
+        </ProductName>
+        <ProductId>
+          <b>Termék azonosító:</b> {product._id}
+        </ProductId>
+        {product.title.toLowerCase().includes("edzésterv") ? null : (
+          <ProductSize>
+            <b>Választott mennyiség:</b> {product.quantitygram}
+          </ProductSize>
+        )}
+      </Details>
+    </ProductDetail>
+    <PriceDetail>
+      <ProductAmountContainer>
+        <ProductAmount>{product.quantity}</ProductAmount>
+      </ProductAmountContainer>
+      <ProductPrice>
+        {product.price * product.quantity} Ft
+      </ProductPrice>
+    </PriceDetail>
+  </Product>
+))}
+            
             <Hr />
           </Info>
           <Summary>

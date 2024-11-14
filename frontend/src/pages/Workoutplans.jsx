@@ -145,7 +145,7 @@ const InfoButton = styled.button`
 const WorkoutPlans = () => {
   const [plans, setPlans] = useState([]);
   const [selectedPlans, setSelectedPlans] = useState([]);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({});
   const dispatch = useDispatch();
@@ -167,7 +167,7 @@ const WorkoutPlans = () => {
       const selectedPlan = plans.find((plan) => plan._id === planId);
       dispatch(addProduct({ ...selectedPlan, quantity }));
     });
-    alert("Kosárhoz adva!");
+   
   };
 
   const togglePlanSelection = (id) => {

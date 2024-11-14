@@ -7,7 +7,7 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartRedux";
 
 
@@ -68,15 +68,6 @@ const FilterTitle = styled.span`
   font-weight: 200;
 `;
 
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0px 5px;
-  cursor: pointer;
-  border: 1px solid black;
-`;
 
 const FilterSize = styled.select`
   margin-left: 10px;
@@ -171,12 +162,12 @@ const Product = () => {
           <FilterContainer>
             <Filter>
               <FilterTitle
-                style={product.quantitygram == 0 ? { display: "none" } : {}}
+                style={product.quantitygram === 0 ? { display: "none" } : {}}
               >
                 Mennyiség:{" "}
               </FilterTitle>
               <FilterSize
-                style={product.quantitygram == 0 ? { display: "none" } : {}}
+                style={product.quantitygram === 0 ? { display: "none" } : {}}
                 onChange={(e) => setQuantitygram(e.target.value)}
               >
                 {product.quantitygram?.map((s) => (

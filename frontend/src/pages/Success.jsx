@@ -21,6 +21,9 @@ const Success = (e) => {
   };
 
   useEffect(() => {
+    console.log("Current User:", currentUser);
+    console.log("Token in userRequest:", userRequest.defaults.headers.Authorization); // Check if token is being set
+  
     const createOrder = async () => {
       try {
         const res = await userRequest.post("/orders", {
@@ -32,19 +35,18 @@ const Success = (e) => {
           amount: cart.total,
           address: data.billing_details.address,
         });
-        console.log(res.data);
+        console.log("Order response:", res.data);
         setOrderId(res.data._id);
-        
       } catch (err) {
-        console.log(err);
+        console.log("Error creating order:", err); // Log error if request fails
       }
     };
-    data && createOrder();
+  
+    if (data) {
+      createOrder();
+    }
   }, [cart, data, currentUser]);
 
-  
-
-  
   return (
     <div
       style={{
