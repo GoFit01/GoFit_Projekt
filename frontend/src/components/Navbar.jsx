@@ -93,7 +93,7 @@ const Right = styled.div`
 `;
 
 const MenuItem = styled.div`
-   font-size: 14px;
+  font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
   position: relative;
@@ -173,13 +173,13 @@ const Navbar = () => {
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
-
   };
 
   const handleLogout = (e) => {
+    e.preventDefault();
     localStorage.clear();
     Logout(dispatch);
-    history.push("/");
+    history.push("/"); 
   };
 
   return (
@@ -187,6 +187,7 @@ const Navbar = () => {
       <Wrapper>
         <Left>
           <Profile>
+            
             <Link to="/profile" style={!user ? { display: "none" } : {}}>PROFIL</Link> 
           </Profile>
         </Left>
@@ -199,17 +200,21 @@ const Navbar = () => {
           <HamburgerMenu onClick={handleMenuClick}>
             <Menu style={{ fontSize: "24px" }} />
           </HamburgerMenu>
+
+          
           <MenuItem style={!user ? { display: "none" } : {}}>
             <Link>
               EDZÉS
               <KeyboardArrowDown style={{ fontSize: "16px", marginLeft: "5px" }} />
             </Link>
-            <DropdownMenu >
-              <Link to="/edzestervek" >EDZÉSTERVEK</Link>
+            <DropdownMenu>
+              <Link to="/edzestervek">EDZÉSTERVEK</Link>
               <Link to="/taplalkozas">TÁPLÁLKOZÁS</Link>
               <Link to="/webshop">WEBSHOP</Link>
             </DropdownMenu>
           </MenuItem>
+
+          
           <Link style={{ textDecoration: "none" }} to={"/register"}>
             <MenuItem style={user ? { display: "none" } : {}}>
               REGISZTRÁCIÓ
@@ -221,40 +226,49 @@ const Navbar = () => {
             </MenuItem>
           </Link>
 
+          
           <MenuItem
             style={!user ? { display: "none" } : {}}
-            onClick={(e) => handleLogout(e)}
+            onClick={handleLogout} 
           >
             KIJELENTKEZÉS
           </MenuItem>
           <MenuItem>
             <Link to="/cart">
-            <Badge badgeContent={quantity} color="primary" style={!user ? { display: "none" } : {}}>
+              <Badge badgeContent={quantity} color="primary" style={!user ? { display: "none" } : {}}>
                 <ShoppingCartOutlined />
               </Badge>
             </Link>
           </MenuItem>
         </Right>
       </Wrapper>
+
+      
       <DropdownMenuMobile open={menuOpen}>
-        <Link to="/edzestervek" onClick={handleMenuClick}>
-          EDZÉSTERVEK
-        </Link>
-        <Link to="/taplalkozas" onClick={handleMenuClick}>
-          TÁPLÁLKOZÁS
-        </Link>
-        <Link to="/webshop" onClick={handleMenuClick}>
-          WEBSHOP
-        </Link>
-        <Link to="/login" onClick={handleMenuClick}>
-          BEJELENTKEZÉS
-        </Link>
-        <Link to="/register" onClick={handleMenuClick}>
-          REGISZTRÁCIÓ
-        </Link>     
-        <Link to="/cart" onClick={handleMenuClick}>
+
+        {user && (
+          <>
+            <Link to="/edzestervek" onClick={handleMenuClick}>EDZÉSTERVEK</Link>
+            <Link to="/taplalkozas" onClick={handleMenuClick}>TÁPLÁLKOZÁS</Link>
+            <Link to="/webshop" onClick={handleMenuClick}>WEBSHOP</Link>
+            <Link to="/profile" onClick={handleMenuClick}>PROFIL</Link>
+          </>
+        )}
+
+        {!user && (
+          <>
+            <Link to="/login" onClick={handleMenuClick}>BEJELENTKEZÉS</Link>
+            <Link to="/register" onClick={handleMenuClick}>REGISZTRÁCIÓ</Link>
+          </>
+        )}
+
+        {user && (
+      <Link to="/cart" onClick={handleMenuClick}>
           KOSÁR
-        </Link>
+      </Link>
+)}
+
+        {user && <Link to="/" onClick={handleLogout}>KIJELENTKEZÉS</Link>}
       </DropdownMenuMobile>
     </Container>
   );

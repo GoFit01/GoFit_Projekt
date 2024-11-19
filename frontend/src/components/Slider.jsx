@@ -96,13 +96,6 @@ const Desc = styled.p`
   text-align: center; 
 `;
 
-const Button = styled.button`
-  padding: 10px;
-  font-size: 1rem; 
-  background-color: transparent;
-  cursor: pointer;
-`;
-
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   
@@ -128,11 +121,6 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Link to="edzestervek">
-                <Button>
-                  UGRÁS AZ EDZÉSSEKHEZ
-                </Button>
-              </Link>       
             </InfoContainer>
           </Slide>
         ))}

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -7,43 +7,54 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
 `;
 
 const ModalContent = styled.div`
-  background: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 400px;
-  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 `;
 
-const ModalHeader = styled.h2`
-  margin-bottom: 10px;
-`;
-
-const ModalButton = styled.button`
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
   border: none;
-  border-radius: 5px;
+  font-size: 1.5rem;
   cursor: pointer;
 `;
 
-const Modal = ({ message, onClose }) => (
-  <ModalOverlay>
-    <ModalContent>
-      <ModalHeader>Gofit Közlendője</ModalHeader>
-      <p>{message}</p>
-      <ModalButton onClick={onClose}>Bezárás</ModalButton>
-    </ModalContent>
-  </ModalOverlay>
-);
+const ModalTitle = styled.h3`
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin-bottom: 15px;
+`;
+
+const ModalText = styled.p`
+  font-size: 1rem;
+  color: #4b5563;
+`;
+
+const Modal = ({ message, onClose }) => {
+  return (
+    <ModalOverlay>
+      <ModalContent>
+        <CloseButton onClick={onClose}>X</CloseButton>
+        <ModalTitle>Üzenet</ModalTitle>
+        <ModalText>{message}</ModalText>
+      </ModalContent>
+    </ModalOverlay>
+  );
+};
 
 export default Modal;

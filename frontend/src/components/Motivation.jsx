@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux'; // A redux állapot eléréséhez
 
 const Container = styled.div`
   width: 100%;
@@ -90,15 +91,21 @@ const CTAButton = styled.button`
 `;
 
 const Motivation = () => {
+  
+  const user = useSelector((state) => state.user.currentUser); 
+
   return (
     <Container>
       <Overlay />
       <Content>
         <Title>Lépj a következő szintre!</Title>
         <Subtitle>Személyre szabott edzéstervek és táplálkozási tanácsadás</Subtitle>
-        <Link to="login">
-        <CTAButton>KEZDJ HOZZÁ AZONNAL!</CTAButton>
-        </Link>
+        
+        {!user && (
+          <Link to="login">
+            <CTAButton>KEZDJ HOZZÁ AZONNAL!</CTAButton>
+          </Link>
+        )}
       </Content>
     </Container>
   );

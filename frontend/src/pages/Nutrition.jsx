@@ -221,18 +221,30 @@ const Nutrition = () => {
         gender === "male"
           ? 88.36 + 13.4 * weight + 4.8 * height - 5.7 * 30
           : 447.6 + 9.2 * weight + 3.1 * height - 4.3 * 30;
-
+  
       const maintenanceCalories = bmr * 1.55;
       setCalorieNeeds({
-        maintenance: Math.round(maintenanceCalories),
-        weightLoss: Math.round(maintenanceCalories * 0.8),
-        weightGain: Math.round(maintenanceCalories * 1.2),
+        maintenance: parseFloat(maintenanceCalories.toFixed(1)), 
+        weightLoss: parseFloat((maintenanceCalories * 0.8).toFixed(1)), 
+        weightGain: parseFloat((maintenanceCalories * 1.2).toFixed(1)), 
       });
-
+  
       setMacros({
-        maintenance: { protein: weight * 2, carbs: weight * 3, fats: weight * 0.8 },
-        weightLoss: { protein: weight * 2.2, carbs: weight * 2, fats: weight * 0.6 },
-        weightGain: { protein: weight * 2.5, carbs: weight * 4, fats: weight * 1.0 },
+        maintenance: {
+          protein: parseFloat((weight * 2).toFixed(1)), 
+          carbs: parseFloat((weight * 3).toFixed(1)), 
+          fats: parseFloat((weight * 0.8).toFixed(1)), 
+        },
+        weightLoss: {
+          protein: parseFloat((weight * 2.2).toFixed(1)), 
+          carbs: parseFloat((weight * 2).toFixed(1)), 
+          fats: parseFloat((weight * 0.6).toFixed(1)), 
+        },
+        weightGain: {
+          protein: parseFloat((weight * 2.5).toFixed(1)), 
+          carbs: parseFloat((weight * 4).toFixed(1)), 
+          fats: parseFloat((weight * 1.0).toFixed(1)), 
+        },
       });
     }
   }, [user]);

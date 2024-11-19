@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartRedux";
 import axios from "axios";
+import Modal from "../components/Modal"; 
 
 const Wrapper = styled.div``;
 const Container = styled.div`
@@ -91,42 +92,6 @@ const AddToCartButton = styled.button`
   }
 `;
 
-const ModalBackground = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-`;
-
-const ModalContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 300px;
-  max-width: 80%;
-`;
-
-const CloseButton = styled.button`
-  background-color: teal;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-  align-self: flex-end;
-
-  &:hover {
-    background-color: darkcyan;
-  }
-`;
-
 const InfoButton = styled.button`
   margin-top: 10px;
   padding: 5px 10px;
@@ -136,6 +101,7 @@ const InfoButton = styled.button`
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
+  align-self: center;
 
   &:hover {
     background-color: darkcyan;
@@ -167,7 +133,6 @@ const WorkoutPlans = () => {
       const selectedPlan = plans.find((plan) => plan._id === planId);
       dispatch(addProduct({ ...selectedPlan, quantity }));
     });
-   
   };
 
   const togglePlanSelection = (id) => {
@@ -176,8 +141,32 @@ const WorkoutPlans = () => {
     );
   };
 
+  // Edzéstervek leírása
+  const workoutPlanDescriptions = {
+    basic: "Az alap edzésterv ideális kezdők számára, akik most ismerkednek a rendszeres edzéssel. Tartalmaz egyensúly- és állóképesség-fejlesztő gyakorlatokat, heti három napos edzéstervet, és egyszerűen követhető, jól strukturált programot. A hangsúly az alapvető mozgásformák elsajátításán van.",
+    advanced: "A haladó edzésterv célja a már tapasztalt sportolók számára, akik szeretnék fejleszteni az erőnlétüket és az izomépítést. Az edzések intenzívebbek, a súlyzós gyakorlatok és a kardió kombinációja segíti a hatékony fejlődést. Heti öt edzéssel nagyobb terhelést biztosít.",
+    personalized: "A személyre szabott edzésterv azoknak ajánlott, akik egyedi célokat tűztek ki, és szeretnék maximálisan kihasználni az edzések potenciálját. A terv figyelembe veszi a felhasználó egyéni szükségleteit, mint például a jelenlegi állapot, a célok, és a preferált mozgásformák. Az edzések az egyén fejlődéséhez igazodnak, és folyamatosan módosulnak.",
+  };
+
   const handleInfoClick = (plan) => {
-    setModalContent(plan);
+    let description = "";
+    switch (plan.type) {
+      case "basic":
+        description = workoutPlanDescriptions.basic;
+        break;
+      case "advanced":
+        description = workoutPlanDescriptions.advanced;
+        break;
+      case "personalized":
+        description = workoutPlanDescriptions.personalized;
+        break;
+      default:
+        description = "Részletes leírás nem elérhető.";
+    }
+    setModalContent({
+      title: plan.title,
+      detailedInfo: description,
+    });
     setShowModal(true);
   };
 
@@ -202,7 +191,14 @@ const WorkoutPlans = () => {
               <PlanTitle>{plan.title}</PlanTitle>
               <PlanDescription>{plan.description}</PlanDescription>
               <PlanPrice>{plan.price} Ft</PlanPrice>
-              <InfoButton onClick={(e) => { e.stopPropagation(); handleInfoClick(plan); }}>Info</InfoButton>
+              <InfoButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleInfoClick(plan);
+                }}
+              >
+                Info
+              </InfoButton>
             </PlanContainer>
           ))}
         </PlanList>
@@ -211,13 +207,10 @@ const WorkoutPlans = () => {
         </ButtonContainer>
 
         {showModal && (
-          <ModalBackground>
-            <ModalContainer>
-              <CloseButton onClick={closeModal}>Bezár</CloseButton>
-              <h2>{modalContent.title}</h2>
-              <p>{modalContent.detailedInfo}</p>
-            </ModalContainer>
-          </ModalBackground>
+          <Modal
+            message={modalContent.detailedInfo}
+            onClose={closeModal}
+          />
         )}
       </Container>
       <Footer />

@@ -53,8 +53,8 @@ const Button = styled.button`
 const Contact = () => {
   return (
     <Container>
-      <Title>Kapcsolat</Title>
-      <Desc>Bármi segitseg</Desc>
+      <Title>Hírlevél</Title>
+      <Desc>Iratkozz fel azonnal</Desc>
       <InputContainer>
         <Input placeholder="e-mail cím" />
         <Button>
