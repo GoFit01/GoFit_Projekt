@@ -27,7 +27,6 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    // Ellenőrizd, hogy létezik-e a felhasználó
     const user = await User.findOne({ username: req.body.username });
     if (!user) {
       return res.status(401).json("Wrong username or password!");

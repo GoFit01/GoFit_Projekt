@@ -11,6 +11,7 @@ const productRoute = require("./routes/product");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const workoutPlanRoute = require("./routes/workoutPlan");
+const emailRoutes = require("./routes/emailRoutes");
 
 dotenv.config(); //env fileból toltes
 
@@ -35,6 +36,7 @@ mongoose
   app.use("/api/orders", orderRoute);
   app.use("/api/checkout", stripeRoute);
   app.use("/api/workoutplans", workoutPlanRoute)
+  app.use("/api/emails", emailRoutes);
 
   app.listen(process.env.PORT || 5000, () => {
     console.log("Backend szerver fut!");

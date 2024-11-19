@@ -129,7 +129,6 @@ const InfoButton = styled.button`
   }
 `;
 
-// Modális stílusok
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -295,7 +294,7 @@ const Nutrition = () => {
           </Card>
         </CardContainer>
 
-        {/* Fehérjék szekció */}
+       
         <Section style={{ backgroundImage: "url('https://content.dhhs.vic.gov.au/sites/default/files/2022-01/protein_0.jpg')" }}>
           <Overlay />
           <SectionContent>
@@ -305,7 +304,7 @@ const Nutrition = () => {
           </SectionContent>
         </Section>
 
-        {/* Szénhidrátok szekció */}
+       
         <Section style={{ backgroundImage: "url('https://www.mindpumpmedia.com/hubfs/shutterstock_731206732.png')" }}>
           <Overlay />
           <SectionContent>
@@ -315,7 +314,7 @@ const Nutrition = () => {
           </SectionContent>
         </Section>
 
-        {/* Zsírok szekció */}
+     
         <Section style={{ backgroundImage: "url('https://images.healthshots.com/healthshots/en/uploads/2023/09/02111527/fats-1-1600x900.jpg')" }}>
           <Overlay />
           <SectionContent>
@@ -326,7 +325,7 @@ const Nutrition = () => {
         </Section>
       </Container>
 
-      {/* Modális ablak */}
+     
       {showModal && (
         <ModalOverlay>
           <ModalContent>

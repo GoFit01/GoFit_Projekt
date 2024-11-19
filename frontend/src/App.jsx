@@ -27,37 +27,45 @@ const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/products/:category">
-          <ProductList />
+        <Route path="/login">
+          {user ? <Redirect to="/" /> : <Login />}
         </Route>
-        <Route path="/product/:id">
-          <Product />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-        <Route path="/success">
-          <Success />
-        </Route>
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}
         </Route>
-        <Route path="/profile">
-        <Profile/>
-        </Route>
-        <Route path="/webshop">
-        <WebShop/>
-        </Route>
-        <Route path="/edzestervek">
-        <WorkoutPlans/>
-        </Route>
-        <Route path="/taplalkozas">
-        <Nutrition/>
-        </Route>        
+        {user ? (
+          <>
+            <Route path="/products/:category">
+              <ProductList />
+            </Route>
+            <Route path="/product/:id">
+              <Product />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route path="/success">
+              <Success />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/webshop">
+              <WebShop />
+            </Route>
+            <Route path="/edzestervek">
+              <WorkoutPlans />
+            </Route>
+            <Route path="/taplalkozas">
+              <Nutrition />
+            </Route>
+          </>
+        ) : (
+          <Redirect to="/login" />
+        )}
       </Switch>
     </Router>
-);
+  );
 };
 
 export default App;

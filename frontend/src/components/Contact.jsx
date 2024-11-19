@@ -1,6 +1,8 @@
 import { Send } from "@material-ui/icons";
 import styled from "styled-components";
+import { useState } from "react";
 import { mobile } from "../responsive";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
   height: 60vh;
@@ -51,13 +53,34 @@ const Button = styled.button`
 `;
 
 const Contact = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSendEmail = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await publicRequest.post("http://localhost:5000/api/emails/send", {
+        email,
+      });
+      alert(res.data.message);
+      setEmail(""); 
+    } catch (error) {
+      console.error("Hiba az e-mail küldésekor:", error);
+      alert("Nem sikerült elküldeni az e-mailt. Próbáld újra.");
+    }
+  };
+
   return (
     <Container>
       <Title>Hírlevél</Title>
       <Desc>Iratkozz fel azonnal</Desc>
       <InputContainer>
-        <Input placeholder="e-mail cím" />
-        <Button>
+        <Input
+          placeholder="e-mail cím"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Button onClick={handleSendEmail}>
           <Send />
         </Button>
       </InputContainer>

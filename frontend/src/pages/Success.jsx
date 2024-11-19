@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { clearCart } from "../redux/cartRedux";
-import { userRequest } from "../requestMethods";
+import { userRequest, updateUserRequestToken } from "../requestMethods"; // Frissítjük a token kezelését
 
-const Success = (e) => {
+const Success = () => {
   const location = useLocation();
   const data = location.state.stripeData;
   const dispatch = useDispatch();
@@ -21,9 +21,13 @@ const Success = (e) => {
   };
 
   useEffect(() => {
+    // Token frissítése a userRequestben
+    updateUserRequestToken();
+
+    // Ellenőrizze, hogy a token helyesen van-e beállítva
     console.log("Current User:", currentUser);
-    console.log("Token in userRequest:", userRequest.defaults.headers.Authorization); // Check if token is being set
-  
+    console.log("Token in userRequest:", userRequest.defaults.headers.Authorization);
+
     const createOrder = async () => {
       try {
         const res = await userRequest.post("/orders", {
@@ -38,10 +42,10 @@ const Success = (e) => {
         console.log("Order response:", res.data);
         setOrderId(res.data._id);
       } catch (err) {
-        console.log("Error creating order:", err); // Log error if request fails
+        console.log("Error creating order:", err);
       }
     };
-  
+
     if (data) {
       createOrder();
     }

@@ -226,6 +226,9 @@ const Cart = () => {
         <ProductId>
           <b>Termék azonosító:</b> {product._id}
         </ProductId>
+        <ProductId>
+          <b>Termék Leirás:</b> {product.desc}
+        </ProductId>
         {product.title.toLowerCase().includes("edzésterv") ? null : (
           <ProductSize>
             <b>Választott mennyiség:</b> {product.quantitygram}
@@ -265,7 +268,7 @@ const Cart = () => {
               image="https://github.com/fzksbalazs.png"
               billingAddress
               shippingAddress
-              description={`Your total is $${cart.total}`}
+              description={`A végösszeg ${cart.total} Ft`}
               amount={cart.total * 100}
               token={onToken}
               stripeKey={KEY}

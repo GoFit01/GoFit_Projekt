@@ -160,28 +160,27 @@ const Product = () => {
           <Desc>{product.desc}</Desc>
           <Price>{product.price} Ft</Price>
           <FilterContainer>
-            <Filter>
-              <FilterTitle
-                style={product.quantitygram === 0 ? { display: "none" } : {}}
-              >
-                Mennyiség:{" "}
-              </FilterTitle>
-              <FilterSize
-                style={product.quantitygram === 0 ? { display: "none" } : {}}
-                onChange={(e) => setQuantitygram(e.target.value)}
-              >
-                {product.quantitygram?.map((s) => (
-                  <FilterSizeOption key={s}>{s} g</FilterSizeOption>
-                ))}
-                <FilterSizeOption
-                  defaultChecked
-                 
-                >
-                  Kérem válasszon!
-                </FilterSizeOption>
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
+  <Filter>
+    <FilterTitle
+      style={product.quantitygram === 0 ? { display: "none" } : {}}
+    >
+      {product.title?.toLowerCase().includes("kapszula") ? "Darabszám: " : "Mennyiség: "}
+    </FilterTitle>
+    <FilterSize
+      style={product.quantitygram === 0 ? { display: "none" } : {}}
+      onChange={(e) => setQuantitygram(e.target.value)}
+    >
+      {product.title?.toLowerCase().includes("kapszula")
+        ? product.quantitygram?.map((s) => (
+            <FilterSizeOption key={s}>{s} db</FilterSizeOption>
+          ))
+        : product.quantitygram?.map((s) => (
+            <FilterSizeOption key={s}>{s} g</FilterSizeOption>
+          ))}
+      <FilterSizeOption defaultChecked>Kérem válasszon!</FilterSizeOption>
+    </FilterSize>
+  </Filter>
+</FilterContainer>
           <AddContainer>
             <AmountContainer>
               <Remove

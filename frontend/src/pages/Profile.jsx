@@ -6,9 +6,10 @@ import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import { useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { userRequest } from "../requestMethods"; // userRequest for authenticated requests
-import { loginSuccess } from "../redux/userRedux"; // To update user data in Redux
+import { userRequest } from "../requestMethods"; 
+import { loginSuccess } from "../redux/userRedux"; 
 import Modal from "../components/Modal"
+
 
 const Container = styled.div`
   display: flex;
@@ -128,6 +129,10 @@ const Profile = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    
+
+    
+
     if (user) {
       setProfileData({
         name: user.username,
@@ -228,7 +233,7 @@ const Profile = () => {
         </ProfileFormContainer>
       </Container>
       <Footer />
-       {/* Modal megjelenítése, ha showModal igaz */}
+      
        {showModal && (
         <Modal
           message="Profil adatokat sikeresen frissítetted!"
