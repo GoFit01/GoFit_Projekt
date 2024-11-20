@@ -149,20 +149,9 @@ const WorkoutPlans = () => {
   };
 
   const handleInfoClick = (plan) => {
-    let description = "";
-    switch (plan.type) {
-      case "basic":
-        description = workoutPlanDescriptions.basic;
-        break;
-      case "advanced":
-        description = workoutPlanDescriptions.advanced;
-        break;
-      case "personalized":
-        description = workoutPlanDescriptions.personalized;
-        break;
-      default:
-        description = "Részletes leírás nem elérhető.";
-    }
+    // A plan objektumból közvetlenül a desc mezőt használjuk
+    const description = plan.desc || "Részletes leírás nem elérhető.";
+    
     setModalContent({
       title: plan.title,
       detailedInfo: description,

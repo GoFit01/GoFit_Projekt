@@ -1,3 +1,4 @@
+const { verify } = require("jsonwebtoken");
 const User = require("../models/User");
 const {
   verifyToken,
@@ -8,7 +9,7 @@ const {
 const router = require("express").Router();
 
 //UPDATE
-router.put("/:id", verifyToken, async (req, res) => {
+router.put("/:id", async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,

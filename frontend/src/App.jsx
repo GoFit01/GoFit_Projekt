@@ -10,6 +10,10 @@ import Success from "./pages/Success";
 import WorkoutPlans from "./pages/Workoutplans";
 import Nutrition from "./pages/Nutrition";
 import { useSelector } from "react-redux";
+import React from 'react';
+import { useEffect } from "react";
+import { updateUserRequestToken } from "./requestMethods"; //
+
 
 import {
   BrowserRouter as Router,
@@ -20,6 +24,11 @@ import {
 
 
 const App = () => {
+  useEffect(() => {
+    // Frissítjük a token-t alkalmazás elindulásakor
+    updateUserRequestToken();
+  }, []); // Az üres tömb biztosítja, hogy csak egyszer fusson le
+  
   const user = useSelector(state=> state.user.currentUser);
   return (
     <Router>
