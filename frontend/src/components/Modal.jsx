@@ -45,12 +45,12 @@ const ModalText = styled.p`
   color: #4b5563;
 `;
 
-const Modal = ({ message, onClose }) => {
+const Modal = ({ title, message, onClose }) => {
   return (
     <ModalOverlay>
       <ModalContent>
         <CloseButton onClick={onClose}>X</CloseButton>
-        <ModalTitle>Üzenet</ModalTitle>
+        <ModalTitle>{title}</ModalTitle>
         <ModalText>{message}</ModalText>
       </ModalContent>
     </ModalOverlay>
