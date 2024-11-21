@@ -9,6 +9,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { userRequest } from "../requestMethods";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const KEY = "pk_test_51Q8gHHE0Esp4B2xrgdSNPaGgO0Q7gzgWPWxzyYgO9QGJr8FX8OPdguVwVJr876FYqYU3Uo2HWzKCnZYLXUoWhlP600K4RbQXYg";
 
@@ -203,11 +204,12 @@ const Cart = () => {
       <Wrapper>
         <Title>KOSÁR</Title>
         <Top>
+          <Link to="webshop">
           <TopButton>VÁSÁRLÁS FOLYTATÁSA</TopButton>
+          </Link>
           <TopButton onClick={handleDelete} type="filled">
             KOSÁR TÖRLÉSE
           </TopButton>
-          <TopButton type="filled">FIZETÉS</TopButton>
         </Top>
         <Bottom>
           <Info >
@@ -225,9 +227,6 @@ const Cart = () => {
         </ProductName>
         <ProductId>
           <b>Termék azonosító:</b> {product._id}
-        </ProductId>
-        <ProductId>
-          <b>Termék Leirás:</b> {product.desc}
         </ProductId>
         {product.title.toLowerCase().includes("edzésterv") ? null : (
           <ProductSize>
