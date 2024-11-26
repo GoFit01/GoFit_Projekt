@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "abd60e93-f312-473f-981d-f96e97df0f49",
+		"name": "Gofit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19522019",
+		"_collection_link": "https://red-space-722165.postman.co/workspace/Szakdolgozat~15d95918-d8a4-439b-9c78-4d99b93bed90/collection/19522019-abd60e93-f312-473f-981d-f96e97df0f49?action=share&source=collection_link&creator=19522019"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Fazekasbalazs\",\r\n    \"email\": \"Fazekasbalazs@gmail.com\",\r\n    \"password\": \"Gofitgpt123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer 546456546zjrt",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Dromarci\",\r\n    \"password\": \"Gofitgpt123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmU5ODk2YTQ4M2U0YjY0NmUwZDAyYiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTczMjEyMTA0MywiZXhwIjoxNzMyMTI0NjQzfQ.bvjdWnraOLCZFTJDNu0aW5a_1SvxH-Ub1sHNcKLZYtQ"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmU5ODk2YTQ4M2U0YjY0NmUwZDAyYiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTczMjEyMTA0MywiZXhwIjoxNzMyMTI0NjQzfQ.bvjdWnraOLCZFTJDNu0aW5a_1SvxH-Ub1sHNcKLZYtQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/users/find/66fe9896a483e4b646e0d02b"
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL USER",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmU5ODk2YTQ4M2U0YjY0NmUwZDAyYiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTczMjEyMTA0MywiZXhwIjoxNzMyMTI0NjQzfQ.bvjdWnraOLCZFTJDNu0aW5a_1SvxH-Ub1sHNcKLZYtQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/users/"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE PRODUCT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmU5ODk2YTQ4M2U0YjY0NmUwZDAyYiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyOTYwNTkzNCwiZXhwIjoxNzI5ODY1MTM0fQ.9KSA280ny_J68Wpy8kvh8kbKsfLdODvCfp2ffvFVpB4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Kollagén kapszula\",\r\n    \"desc\" : \"Kollagén kapszuláinkat természetesen előforduló 1. típusú sertés kollagént tartalmaz, amelyet kifejezetten a természetes szint fokozására és támogatására fejlesztettünk ki.\",\r\n    \"img\" :\"https://static.thcdn.com/images/large/webp//productimg/1600/1600/11338775-9584828040720049.jpg \",\r\n    \"categories\" : \"vitamin\",\r\n    \"quantitygram\" : [\"60\", \"90\"],\r\n    \"price\" : 7450,\r\n    \"brand\": \"Myprotein\",\r\n    \"type\" : \"Kollagen\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/products/create"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE WORKOUT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmU5ODk2YTQ4M2U0YjY0NmUwZDAyYiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTczMDkwNDgzMCwiZXhwIjoxNzMxMTY0MDMwfQ.Jjtity-y1HeOk804tid4CYvtZou1_Eqxh7o6MmQzgr8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Személyre szabott edzésterv\",\r\n    \"desc\" : \"Személyre szabott gyakorlatok.\",\r\n    \"info\" :\"Ez a személyre szabott edzésterv teljesen a te igényeidhez igazodik...\",\r\n    \"img\" : \"https://www.nourishmovelove.com/wp-content/uploads/2022/04/4WeekChallenge3.jpg\",\r\n    \"price\" : 10000 \r\n\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/workoutplans/create"
+			},
+			"response": []
+		},
+		{
+			"name": "FIND PRODUCT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjk2OWQ5MjZjZmE1ZTNkMzU2M2MxMiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MTA3NzAyNiwiZXhwIjoxNjUxMzM2MjI2fQ.ZafHoUS2B_icvP6gtd6rspNiZx87ASMEe2hbtvvSsN0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Apple Watch Series 67\",\r\n    \"desc\" : \"test\",\r\n    \"img\" :\"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/38-alu-space-sport-black-nc-1up?wid=940&hei=1112&fmt=png-alpha&.v=1594318693000\",\r\n    \"categories\" : [\"Apple\", \"kiegészitők\"],\r\n    \"color\" : \"white\",\r\n    \"price\" : 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/products/find/622128c8e9914d02ac4b6d9a"
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL PRODUCTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjk2OWQ5MjZjZmE1ZTNkMzU2M2MxMiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MTA3NzAyNiwiZXhwIjoxNjUxMzM2MjI2fQ.ZafHoUS2B_icvP6gtd6rspNiZx87ASMEe2hbtvvSsN0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/products/"
+			},
+			"response": []
+		},
+		{
+			"name": "ADD ORDER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmU5ODk2YTQ4M2U0YjY0NmUwZDAyYiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyODQwMDEzMywiZXhwIjoxNzI4NjU5MzMzfQ.4_qTyo7e3K891pPpKLVz9QRsQY966jTuh20pJN1_6Cw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"66fe9896a483e4b646e0d02b\",\r\n    \"products\": [\r\n        {\r\n            \"productId\" : \"66fe9d2256afd2cc830b54dd\",\r\n            \"quantity\" : 3\r\n        }\r\n       \r\n    ],\r\n    \"amount\": 250,\r\n    \"address\":\"Magyarország\"\r\n\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/api/orders"
+			},
+			"response": []
+		}
+	]
+}
