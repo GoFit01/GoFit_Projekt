@@ -264,7 +264,7 @@ const Cart = () => {
             </SummaryItem>
             <StripeCheckout
               name="GOFIT"
-              image="https://github.com/fzksbalazs.png"
+              image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLgR7yJ9Vk2hxKMTzEHSUHDK4IirV-s7tOtpJ9w9PEqtz-lO3mXscpxuwrfU3DYAHRpE&usqp=CAU"
               billingAddress
               shippingAddress
               description={`A végösszeg ${cart.total} Ft`}
