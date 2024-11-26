@@ -195,8 +195,6 @@ const Product = () => {
               />
             </AmountContainer>
             <Button onClick={handleClick}
-           
-
             >
               HOZZÁADÁS A KOSÁRHOZ
             </Button>

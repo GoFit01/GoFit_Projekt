@@ -141,15 +141,8 @@ const WorkoutPlans = () => {
     );
   };
 
-  // Edzéstervek leírása
-  const workoutPlanDescriptions = {
-    basic: "Az alap edzésterv ideális kezdők számára, akik most ismerkednek a rendszeres edzéssel. Tartalmaz egyensúly- és állóképesség-fejlesztő gyakorlatokat, heti három napos edzéstervet, és egyszerűen követhető, jól strukturált programot. A hangsúly az alapvető mozgásformák elsajátításán van.",
-    advanced: "A haladó edzésterv célja a már tapasztalt sportolók számára, akik szeretnék fejleszteni az erőnlétüket és az izomépítést. Az edzések intenzívebbek, a súlyzós gyakorlatok és a kardió kombinációja segíti a hatékony fejlődést. Heti öt edzéssel nagyobb terhelést biztosít.",
-    personalized: "A személyre szabott edzésterv azoknak ajánlott, akik egyedi célokat tűztek ki, és szeretnék maximálisan kihasználni az edzések potenciálját. A terv figyelembe veszi a felhasználó egyéni szükségleteit, mint például a jelenlegi állapot, a célok, és a preferált mozgásformák. Az edzések az egyén fejlődéséhez igazodnak, és folyamatosan módosulnak.",
-  };
-
   const handleInfoClick = (plan) => {
-    // A plan objektumból közvetlenül a desc mezőt használjuk
+    
     const description = plan.desc || "Részletes leírás nem elérhető.";
     
     setModalContent({
@@ -197,6 +190,7 @@ const WorkoutPlans = () => {
 
         {showModal && (
           <Modal
+            title = {modalContent.title}
             message={modalContent.detailedInfo}
             onClose={closeModal}
           />

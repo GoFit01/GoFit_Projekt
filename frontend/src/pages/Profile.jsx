@@ -10,7 +10,6 @@ import { userRequest } from "../requestMethods";
 import { loginSuccess } from "../redux/userRedux"; 
 import Modal from "../components/Modal"
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,11 +17,11 @@ const Container = styled.div`
   justify-content: center;
   min-height: 100vh;
   padding: 40px;
-  background-color: #f5f5f5; /* Egységes háttérszín */
+  background-color: #f5f5f5; 
 
   @media (max-width: 768px) {
     padding: 20px;
-    margin: 0 20px; /* Margó az oldal széleitől 768px alatt */
+    margin: 0 20px;
   }
 `;
 
@@ -41,19 +40,19 @@ const ProfileFormContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px; /* Maximális szélesség beállítása */
+  max-width: 500px; 
   display: flex;
   flex-direction: column;
   align-items: center;
 
   @media (max-width: 768px) {
     padding: 20px;
-    width: 100%; /* A konténer szélessége kisebb képernyőkön */
+    width: 100%; 
   }
 `;
 
 const ProfileIcon = styled(AccountCircle)`
-  font-size: 80px !important; /* Nagyobb méret a profilképhez */
+  font-size: 80px !important; 
   color: teal;
   margin-bottom: 20px;
 `;
@@ -61,14 +60,14 @@ const ProfileIcon = styled(AccountCircle)`
 const ProfileForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 100%; /* A form teljes szélessége kitöltve */
+  width: 100%; 
 `;
 
 const FormItem = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  width: 100%; /* A FormItem szélessége 100% */
+  width: 100%; 
 `;
 
 const Label = styled.label`
@@ -81,15 +80,15 @@ const Input = styled.input`
   padding: 12px;
   border-radius: 5px;
   border: 1px solid lightgray;
-  width: 100%; /* Szélesség 100% */
-  box-sizing: border-box; /* Biztosítja, hogy a padding beleszámít a szélességbe */
+  width: 100%; 
+  box-sizing: border-box; 
 `;
 
 const Select = styled.select`
   padding: 12px;
   border-radius: 5px;
   border: 1px solid lightgray;
-  width: 100%; /* Ugyanakkora szélesség, mint az Input */
+  width: 100%;
   box-sizing: border-box;
 `;
 
@@ -102,7 +101,7 @@ const Button = styled.button`
   font-size: 16px;
   cursor: pointer;
   width: 100%;
-  margin-top: 10px; /* Margin a gomb fölött */
+  margin-top: 10px; 
 
   &:hover {
     background-color: darkcyan;
@@ -129,10 +128,6 @@ const Profile = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    
-
-    
-
     if (user) {
       setProfileData({
         name: user.username,
@@ -233,9 +228,10 @@ const Profile = () => {
         </ProfileFormContainer>
       </Container>
       <Footer />
-      
+       
        {showModal && (
         <Modal
+          title = "Üzenet"
           message="Profil adatokat sikeresen frissítetted!"
           onClose={() => setShowModal(false)} 
           />

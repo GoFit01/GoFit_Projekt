@@ -18,7 +18,7 @@ const Title = styled.h1`
   color: #333;
   font-size: 2.5rem;
   margin-bottom: 30px;
-  text-align: center; /* Cím középre igazítása */
+  text-align: center; 
 `;
 
 const CardContainer = styled.div`
@@ -27,11 +27,11 @@ const CardContainer = styled.div`
   gap: 20px;
   width: 100%;
   max-width: 1200px;
-  justify-content: center; /* Kártyák középre igazítása */
+  justify-content: center; 
   margin-top: 20px;
 
   @media (max-width: 770px) {
-    justify-content: center; /* Kártyák középre igazítása kisebb képernyőkön */
+    justify-content: center; 
   }
 `;
 
@@ -89,7 +89,7 @@ const Section = styled.div`
 `;
 
 const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.6); /* Sötétebb háttér */
+  background-color: rgba(0, 0, 0, 0.6); 
   position: absolute;
   top: 0;
   left: 0;
@@ -128,6 +128,7 @@ const InfoButton = styled.button`
     background-color: darkcyan;
   }
 `;
+
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -294,7 +295,7 @@ const Nutrition = () => {
           </Card>
         </CardContainer>
 
-       
+        
         <Section style={{ backgroundImage: "url('https://content.dhhs.vic.gov.au/sites/default/files/2022-01/protein_0.jpg')" }}>
           <Overlay />
           <SectionContent>
@@ -314,7 +315,7 @@ const Nutrition = () => {
           </SectionContent>
         </Section>
 
-     
+        
         <Section style={{ backgroundImage: "url('https://images.healthshots.com/healthshots/en/uploads/2023/09/02111527/fats-1-1600x900.jpg')" }}>
           <Overlay />
           <SectionContent>
@@ -325,7 +326,7 @@ const Nutrition = () => {
         </Section>
       </Container>
 
-     
+      
       {showModal && (
         <ModalOverlay>
           <ModalContent>

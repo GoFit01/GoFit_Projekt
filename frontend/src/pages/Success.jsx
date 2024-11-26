@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { clearCart } from "../redux/cartRedux";
-import { userRequest } from "../requestMethods"; // Frissítjük a token kezelését
+import { userRequest } from "../requestMethods"; 
 
 const Success = () => {
   const location = useLocation();
@@ -22,17 +22,12 @@ const Success = () => {
 
   useEffect(() => {
     if (currentUser) {
-      // Ha van aktuális felhasználó, akkor állítsuk be a token-t az Axios fejlécébe
       userRequest.defaults.headers.Authorization = `Bearer ${currentUser.accessToken}`;
     }
-
-    // Más logika itt
-  }, [currentUser]); // Csak akkor fut le, ha a currentUser változik
+  }, [currentUser]); 
 
   useEffect(() => {
     
-
-    // Ellenőrizze, hogy a token helyesen van-e beállítva
     console.log("Current User:", currentUser);
     console.log("Token in userRequest:", userRequest.defaults.headers.Authorization);
 
